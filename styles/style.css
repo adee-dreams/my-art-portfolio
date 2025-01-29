@@ -1,23 +1,38 @@
-:root {
-    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --neon-border: rgba(99, 102, 241, 0.4);
+@font-face {
+    font-family: 'MyFont';
+    src: url('../fonts/Myfont-Regular.woff2') format('woff2'),
+         url('../fonts/Myfont-Regular.woff') format('woff'),
+         url('../fonts/Myfont-Regular.ttf') format('truetype'),
+         url('../fonts/Myfont-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-/* Web3-inspired base styles */
+:root {
+    --primary-gradient: linear-gradient(135deg, #000000 0%, #333333 50%, #ffffff 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --neon-border: rgba(0, 0, 0, 0.8);
+    --custom-font: 'MyFont', sans-serif;
+}
+
+/* Light mode styles */
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--custom-font);
     margin: 0;
     padding: 20px;
-    background: #0f172a;
-    color: #f8fafc;
+    background: #ffffff;
+    color: #000000;
     line-height: 1.6;
     transition: all 0.3s ease;
+    font-size: 18px;
+    text-transform: uppercase;
 }
 
-.dark-mode {
-    background: #020617;
-    --glass-bg: rgba(0, 0, 0, 0.2);
+/* Dark mode styles */
+body.dark-mode {
+    background: #000000;
+    color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.1);
 }
 
 header {
@@ -32,12 +47,19 @@ header {
 }
 
 header h1 {
-    font-size: 2.5rem;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    letter-spacing: -0.05em;
+    font-family: var(--custom-font);
+    font-size: 3.5rem;
+    color: #000000;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+body.dark-mode header h1 {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
 }
 
 .gallery {
@@ -46,18 +68,40 @@ header h1 {
     gap: 20px;
 }
 
-.gallery img {
+.gallery .pdf-viewer {
     width: 100%;
+    height: 600px;
     border: 2px solid var(--neon-border);
     border-radius: 12px;
-    transform-style: preserve-3d;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.gallery img:hover {
-    transform: translateY(-5px) rotateX(10deg) rotateY(-5deg);
-    box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+.gallery .pdf-viewer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.pdf-fallback {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 2px solid var(--neon-border);
+    border-radius: 12px;
+}
+
+.pdf-fallback a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.dark-mode .pdf-fallback {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .pdf-fallback a {
+    color: #fff;
 }
 
 .dark-mode {
@@ -66,12 +110,91 @@ header h1 {
     --neon-border: rgba(99, 102, 241, 0.6);
 }
 
+
+/* Slider switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    border: 2px solid #000;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #000;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #000;
+    border-color: #fff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+    background-color: #fff;
+}
+
+.dark-mode .slider {
+    background-color: #000;
+    border-color: #fff;
+}
+
+.dark-mode .slider:before {
+    background-color: #fff;
+}
+
+.dark-mode input:checked + .slider {
+    background-color: #fff;
+    border-color: #000;
+}
+
+.dark-mode input:checked + .slider:before {
+    background-color: #000;
+}
+
 footer {
     text-align: center;
     margin-top: 20px;
-    padding: 10px;
-    background-color: #333;
-    color: white;
+    padding: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    border-top: 2px solid #000000;
+    font-family: var(--custom-font);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+body.dark-mode footer {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 /* Responsive styles for tablets */
