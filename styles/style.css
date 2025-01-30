@@ -8,24 +8,173 @@
     font-style: normal;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideInUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeScale {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes cursorTrail {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
 :root {
-    --primary-gradient: linear-gradient(135deg, #000000 0%, #333333 50%, #ffffff 100%);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --neon-border: rgba(0, 0, 0, 0.8);
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --transition-speed: 0.3s;
+    --spacing-unit: 1rem;
     --custom-font: 'MyFont', sans-serif;
 }
 
-/* Light mode styles */
 body {
-    font-family: var(--custom-font);
     margin: 0;
     padding: 20px;
     background: #ffffff;
     color: #000000;
+    font-family: 'MyFont', sans-serif;
+    animation: fadeScale 0.8s ease-out;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>') 0 24, auto;
+}
+
+body.dark-mode {
+    --primary-color: #ffffff;
+    --secondary-color: #000000;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>') 0 24, auto;
+}
+
+.main-header {
+    padding: var(--spacing-unit) 0;
+    background: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-unit);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 2rem 0;
+    font-weight: normal;
+}
+
+.hero-title,
+.section-title,
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--custom-font);
+}
+
+/* Theme switch styles */
+.theme-switch {
+    position: relative;
+    margin-left: auto;
+}
+
+/* Update existing styles to use CSS variables */
+.gallery, 
+.philosophy-section,
+.contact-section,
+.quote-section {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.btn {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Keep existing responsive styles... */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+}
+
+/* ...existing responsive styles... */
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #000000 0%, #333333 50%, #ffffff 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --neon-border: rgba(0, 0, 0, 0.8);
+    --primary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --text-color: #333;
+    --light-bg: #f9f9f9;
+}
+
+/* Light mode styles */
+body {
+    font-family: 'MyFont', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+    color: var(--text-color);
     line-height: 1.6;
     transition: all 0.3s ease;
     font-size: 18px;
     text-transform: uppercase;
+    animation: fadeScale 0.8s ease-out;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>') 0 24, auto;
 }
 
 /* Dark mode styles */
@@ -33,17 +182,12 @@ body.dark-mode {
     background: #000000;
     color: #ffffff;
     --glass-bg: rgba(255, 255, 255, 0.1);
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>') 0 24, auto;
 }
 
 header {
     text-align: center;
-    padding: 2rem;
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--neon-border);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
-    position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 header h1 {
@@ -52,33 +196,104 @@ header h1 {
     color: #000000;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    border-bottom: 2px solid #000000;
-    padding-bottom: 0.5rem;
+    position: relative;
+    padding-bottom: 1rem;
     font-weight: bold;
+    animation: slideInUp 1s ease-out;
+    transition: transform 0.3s ease;
+}
+
+header h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #000000;
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+
+header h1:hover {
+    transform: scale(1.02);
+}
+
+header h1:hover::after {
+    transform: scaleX(1.1);
 }
 
 body.dark-mode header h1 {
     color: #ffffff;
-    border-bottom-color: #ffffff;
+}
+
+body.dark-mode header h1::after {
+    background: #ffffff;
 }
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
-.gallery .pdf-viewer {
+.pdf-container {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--secondary-color);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.pdf-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+.pdf-viewer {
     width: 100%;
-    height: 600px;
-    border: 2px solid var(--neon-border);
-    border-radius: 12px;
-    transition: all 0.3s ease;
+    height: 80vh;
+    border: none;
+    transition: all 0.4s ease;
 }
 
-.gallery .pdf-viewer:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+.artwork-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+}
+
+.pdf-container:hover .artwork-info {
+    transform: translateY(0);
+}
+
+/* Add zoom functionality styles */
+.zoom-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.zoom-container.active {
+    display: flex;
+    opacity: 1;
 }
 
 .pdf-fallback {
@@ -181,14 +396,23 @@ input:checked + .slider:before {
 
 footer {
     text-align: center;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    color: #000000;
-    border-top: 2px solid #000000;
-    font-family: var(--custom-font);
-    font-size: 1rem;
-    text-transform: uppercase;
+    margin-top: 0;  /* Remove top margin from footer */
+    padding: 1rem;
+    font-family: 'MyFont', sans-serif;
+}
+
+footer p {
+    animation: float 3s ease-in-out infinite;
+    font-size: 4.5rem;  /* Increased from 2rem to 4.5rem */
+    letter-spacing: 0.15em;  /* Increased letter spacing */
+    padding: 2rem 0;  /* Increased padding */
+    font-weight: bold;  /* Make it bolder */
+    transition: all 0.3s ease;
+}
+
+footer p:hover {
+    transform: scale(1.1);
+    letter-spacing: 0.2em;
 }
 
 body.dark-mode footer {
@@ -200,7 +424,17 @@ body.dark-mode footer {
 /* Responsive styles for tablets */
 @media (max-width: 768px) {
     .gallery {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    footer p {
+        font-size: 3.5rem;
     }
 }
 
@@ -219,4 +453,265 @@ body.dark-mode footer {
     .gallery img:hover {
         transform: none;
     }
+
+    footer p {
+        font-size: 2.5rem;  /* Slightly smaller on mobile */
+        padding: 1rem 0;
+    }
+
+    #canvas-container {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 2.8rem;
+    }
+
+    .pdf-viewer {
+        height: 500px;
+    }
+
+    footer p {
+        font-size: 3rem;
+    }
+}
+
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin: 4rem 0;
+}
+
+.gallery-section {
+    padding: 4rem 0;
+    background: var(--light-bg);
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.philosophy-card {
+    padding: 2rem;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.philosophy-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+}
+
+.btn {
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: darken(var(--accent-color), 10%);
+}
+
+.quote-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+}
+
+.quote-section blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+}
+
+.main-footer {
+    padding: 2rem;
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Slideshow styles */
+.slideshow-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide-nav {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.slide-nav button {
+    font-family: var(--custom-font);
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.slide-nav button:hover {
+    opacity: 0.8;
+}
+
+.pdf-viewer {
+    width: 100%;
+    height: 80vh;
+    border: none;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pdf-viewer:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+}
+
+/* Add animated class for JavaScript dynamic additions */
+.animate-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* 3D section styles */
+#canvas-container {
+    width: 100%;
+    height: 600px;  /* Much taller container for larger cube */
+    margin: 2rem 0;
+    padding: 2rem 0;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeScale 0.8s ease-out forwards;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add animation to section headings */
+section h2 {
+    animation: slideInUp 1.2s ease-out forwards;  /* Changed to forwards fill-mode */
+    opacity: 0;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    transition: transform 0.3s ease;
+    color: var(--primary-color);  /* Added to ensure color consistency */
+}
+
+section h2:hover {
+    transform: scale(1.02);
+}
+
+.section-heading {
+    font-family: var(--custom-font);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideInUp 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    color: var(--primary-color);
+}
+
+.spacer {
+    height: 2rem;
+}
+
+.cursor-trail {
+    pointer-events: none;
+    position: fixed;
+    width: 1px;
+    height: 20px;
+    background: #2B2B2B;
+    opacity: 0.4;
+    transform-origin: top;
+    mix-blend-mode: multiply;
+    z-index: 9999;
+    transition: opacity 0.3s;
+}
+
+body.dark-mode .cursor-trail {
+    background: #CCCCCC;
+    mix-blend-mode: screen;
+}
+
+.key-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.key-hint.visible {
+    opacity: 1;
 }

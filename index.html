@@ -1,24 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my art portfolio</title>
     <link rel="stylesheet" href="styles/style.css">
+    <meta name="description" content="Art portfolio showcasing drawings and illustrations">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <header>
         <h1>welcome to my art studio</h1>
     </header>
-    <section>
-        <h2>my artwork</h2>
-        <div class="gallery">
-            <embed src="images/Scanned drawing 1.pdf" type="application/pdf" class="pdf-viewer">
-            <embed src="images/Scanned drawing 2.pdf" type="application/pdf" class="pdf-viewer">
-        </div>
-    </section>
+    
+    <main>
+        <section>
+            <div class="gallery">
+                <div class="pdf-container">
+                    <iframe src="images/Scanned drawing 1.pdf" title="Artwork A" class="pdf-viewer">
+                        <p>Your browser does not support iframes. <a href="images/Scanned drawing 1.pdf">Download PDF</a></p>
+                    </iframe>
+                    <div class="artwork-info">
+                        <h3>Artwork A</h3>
+                        <p>Medium: Ink on Paper</p>
+                        <p>Created: Present</p>
+                    </div>
+                </div>
+                <div class="pdf-container">
+                    <iframe src="images/Scanned drawing 2.pdf" title="Artwork B" class="pdf-viewer">
+                        <p>Your browser does not support iframes. <a href="images/Scanned drawing 2.pdf">Download PDF</a></p>
+                    </iframe>
+                    <div class="artwork-info">
+                        <h3>Artwork B</h3>
+                        <p>Medium: Ink on Paper</p>
+                        <p>Created: Present</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="zoom-container" class="zoom-container">
+        <div class="zoom-content"></div>
+    </div>
+
+    <div id="canvas-container"></div>
+    
     <footer>
         <p>adee.dreams</p>
     </footer>
     <script src="scripts/script.js"></script>
+    <script src="scripts/3d-scene.js"></script>
 </body>
 </html>
